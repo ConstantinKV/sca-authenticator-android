@@ -19,10 +19,11 @@
 
 sudo: false
 language: android
-#dist: trusty
+dist: trusty
 jdk: oraclejdk8
 env:
   global:
+    - TRAVIS_WORKER_DOCKER_MEMORY=8G
     - ADB_INSTALL_TIMEOUT=30 # minutes
     - ANDROID_HOME=/usr/local/android-sdk
     - TOOLS=${ANDROID_HOME}/tools
@@ -74,7 +75,7 @@ before_install:
   - echo yes | sdkmanager "platforms;android-27"
   - echo yes | sdkmanager "build-tools;28.0.3"
 before_script:
-  - echo no | android create avd --force -n test -t "android-"$ANDROID_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - echo no | android -v create avd --force -n test -t "android-"$ANDROID_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
   - QEMU_AUDIO_DRV=none emulator -avd test -no-skin -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
