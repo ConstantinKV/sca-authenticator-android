@@ -19,7 +19,7 @@
 
 sudo: false
 language: android
-dist: trusty
+#dist: trusty
 jdk: oraclejdk8
 env:
   global:
