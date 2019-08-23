@@ -53,21 +53,21 @@ class SingleAuthorizationPollingServiceTest {
         Assert.assertNotNull(service.contract)
     }
 
-//    @Test//TODO un-comment
-//    @Throws(Exception::class)
-//    fun startTest() {
-//        val service = SingleAuthorizationPollingService()
-//        service.contract = mockContract
-//        every { mockContract.getConnectionData() } returns ConnectionAndKey(
-//            requestConnection,
-//            privateKey
-//        )
-//        service.start(authorizationId = "1")
-//
-//        Assert.assertTrue(service.isRunning())
-//        Assert.assertNotNull(service.connector)
-//        verify(atLeast = 1) { mockContract.getConnectionData() }
-//    }
+    @Test
+    @Throws(Exception::class)
+    fun startTest() {
+        val service = SingleAuthorizationPollingService()
+        service.contract = mockContract
+        every { mockContract.getConnectionData() } returns ConnectionAndKey(
+            requestConnection,
+            privateKey
+        )
+        service.start(authorizationId = "1")
+
+        Assert.assertTrue(service.isRunning())
+        Assert.assertNotNull(service.connector)
+        verify(atLeast = 1) { mockContract.getConnectionData() }
+    }
 
     @Test
     @Throws(Exception::class)

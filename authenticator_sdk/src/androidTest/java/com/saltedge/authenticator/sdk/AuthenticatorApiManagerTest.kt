@@ -48,25 +48,23 @@ import java.security.PrivateKey
 @RunWith(AndroidJUnit4::class)
 class AuthenticatorApiManagerTest {
 
-    //TODO un-comment
+    @Test
+    @Throws(Exception::class)
+    fun initConnectionRequestTest() {
+        val mockCallback = mockkClass(ConnectionInitResult::class)
+        val mockCall: Call<CreateConnectionResponseData> =
+            mockkClass(Call::class) as Call<CreateConnectionResponseData>
+        every { mockApi.postNewConnectionData(requestUrl = any(), body = any()) } returns mockCall
+        every { mockCall.enqueue(any()) } returns Unit
+        AuthenticatorApiManager.initConnectionRequest(
+            baseUrl = "",
+            publicKey = "key",
+            pushToken = "pushToken",
+            resultCallback = mockCallback
+        )
 
-//    @Test
-//    @Throws(Exception::class)
-//    fun initConnectionRequestTest() {
-//        val mockCallback = mockkClass(ConnectionInitResult::class)
-//        val mockCall: Call<CreateConnectionResponseData> =
-//            mockkClass(Call::class) as Call<CreateConnectionResponseData>
-//        every { mockApi.postNewConnectionData(requestUrl = any(), body = any()) } returns mockCall
-//        every { mockCall.enqueue(any()) } returns Unit
-//        AuthenticatorApiManager.initConnectionRequest(
-//            baseUrl = "",
-//            publicKey = "key",
-//            pushToken = "pushToken",
-//            resultCallback = mockCallback
-//        )
-//
-//        verify { mockCall.enqueue(any()) }
-//    }
+        verify { mockCall.enqueue(any()) }
+    }
 
     @Test
     @Throws(Exception::class)
